@@ -56,3 +56,4 @@ gem 'pry-rails'
 gem 'jwt'
 gem 'rack-cors'
 gem 'geocoder'
+# do the knock jwt one.
