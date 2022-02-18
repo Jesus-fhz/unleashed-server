@@ -74,6 +74,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     erubi (1.10.0)
@@ -209,6 +210,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  colorize
   geocoder
   jbuilder (~> 2.5)
   jwt

@@ -55,3 +55,4 @@ gem 'jwt'
 gem 'rack-cors'
 gem 'geocoder'
 gem 'knock' # https://github.com/Chris-Stevenson-Git/Knock-Example-Rails
+gem 'colorize'

@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :user_type %>
-    <%= form.number_field :user_type %>
+    <%= form.select :user_type, User::USERTYPES %>
   </div>
 
   <div class="field">

@@ -1,6 +1,7 @@
 class Walk < ApplicationRecord
     enum status: [:pending, :accepted, :ongoing, :finished] # maybe cancelled
-
+    STATUSES = [:pending, :accepted, :ongoing, :finished]
+    validates :status, presence: true
     
     # 1. Converts all origin & destination addresses to the API query form
     # 2. Performs HTTP API request

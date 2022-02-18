@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_18_104025) do
+ActiveRecord::Schema.define(version: 2022_02_18_215859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pets", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "image"
+    t.string "name"
+    t.string "breed"
+    t.integer "age"
+    t.boolean "is_male"
+    t.string "size"
+    t.boolean "desexed"
+    t.boolean "can_walk_offleash"
+    t.boolean "can_be_petted"
+    t.boolean "can_walk_with_other_dogs"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -23,8 +39,10 @@ ActiveRecord::Schema.define(version: 2022_02_18_104025) do
     t.float "earnings"
     t.float "geocode_lat"
     t.float "geocode_lng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-  
+
   create_table "walks", force: :cascade do |t|
     t.integer "pet_id"
     t.integer "user_id"
