@@ -50,10 +50,8 @@ group :test do
   gem 'chromedriver-helper'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-
 gem 'pry-rails'
 gem 'jwt'
 gem 'rack-cors'
 gem 'geocoder'
-# do the knock jwt one.
+gem 'knock' # https://github.com/Chris-Stevenson-Git/Knock-Example-Rails
