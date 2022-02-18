@@ -2,17 +2,9 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
 
-
-
 Walk.destroy_all
 
 puts ('Creating a testing walk seed.')
-
-
-
-
-
-
 
 w1 = Walk.create!(
     status: 1,
@@ -20,3 +12,5 @@ w1 = Walk.create!(
     duration: 30,
     special_instruction: 'he is aggressive with other larger dogs.'
 )
+
+#TODO: figure out how to exactly when the location duration infor needs to be devised etc. 
