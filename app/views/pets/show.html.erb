@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @pet.user_id %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @pet.image %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pet.name %>
+</p>
+
+<p>
+  <strong>Breed:</strong>
+  <%= @pet.breed %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @pet.age %>
+</p>
+
+<p>
+  <strong>Is male:</strong>
+  <%= @pet.is_male %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @pet.size %>
+</p>
+
+<p>
+  <strong>Desexed:</strong>
+  <%= @pet.desexed %>
+</p>
+
+<p>
+  <strong>Can walk offleash:</strong>
+  <%= @pet.can_walk_offleash %>
+</p>
+
+<p>
+  <strong>Can be petted:</strong>
+  <%= @pet.can_be_petted %>
+</p>
+
+<p>
+  <strong>Can walk with other dogs:</strong>
+  <%= @pet.can_walk_with_other_dogs %>
+</p>
+
+<%= link_to 'Edit', edit_pet_path(@pet) %> |
+<%= link_to 'Back', pets_path %>
