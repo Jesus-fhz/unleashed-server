@@ -1,0 +1,57 @@
+<%= form_with(model: walk, local: true) do |form| %>
+  <% if walk.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(walk.errors.count, "error") %> prohibited this walk from being saved:</h2>
+
+      <ul>
+      <% walk.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :pet_id %>
+    <%= form.number_field :pet_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.text_field :cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.text_field :duration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :geocode_lat %>
+    <%= form.text_field :geocode_lat %>
+  </div>
+
+  <div class="field">
+    <%= form.label :geocode_lng %>
+    <%= form.text_field :geocode_lng %>
+  </div>
+
+  <div class="field">
+    <%= form.label :special_instruction %>
+    <%= form.text_area :special_instruction %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
