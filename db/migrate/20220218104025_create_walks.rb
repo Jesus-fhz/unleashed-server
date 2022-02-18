@@ -3,7 +3,7 @@ class CreateWalks < ActiveRecord::Migration[5.2]
     create_table :walks do |t|
       t.integer :pet_id
       t.integer :user_id
-      t.integer :status, default: 0
+      t.integer :status
       t.float :cost
       t.float :duration
       t.float :geocode_lat

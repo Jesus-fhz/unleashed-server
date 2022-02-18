@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pet:</strong>
+  <%= @walk.pet_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @walk.user_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @walk.status %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @walk.cost %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @walk.duration %>
+</p>
+
+<p>
+  <strong>Geocode lat:</strong>
+  <%= @walk.geocode_lat %>
+</p>
+
+<p>
+  <strong>Geocode lng:</strong>
+  <%= @walk.geocode_lng %>
+</p>
+
+<p>
+  <strong>Special instruction:</strong>
+  <%= @walk.special_instruction %>
+</p>
+
+<%= link_to 'Edit', edit_walk_path(@walk) %> |
+<%= link_to 'Back', walks_path %>
