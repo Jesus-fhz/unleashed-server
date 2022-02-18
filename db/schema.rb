@@ -15,6 +15,16 @@ ActiveRecord::Schema.define(version: 2022_02_18_104025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_type", default: 0
+    t.string "address"
+    t.boolean "is_available"
+    t.float "earnings"
+    t.float "geocode_lat"
+    t.float "geocode_lng"
+  end
+  
   create_table "walks", force: :cascade do |t|
     t.integer "pet_id"
     t.integer "user_id"

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  user_type: 1
+  address: MyString
+  is_available: 
+  earnings: 1.5
+  geocode_lat: 1.5
+  geocode_lng: 1.5
+
+two:
+  name: MyString
+  user_type: 1
+  address: MyString
+  is_available: 
+  earnings: 1.5
+  geocode_lat: 1.5
+  geocode_lng: 1.5
