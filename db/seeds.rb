@@ -11,3 +11,7 @@ w1 = Walk.create!(
     duration: 30,
     special_instruction: 'he is aggressive with other larger dogs.'
 )
+
+
+
+#TODO: figure out how to exactly when the location duration infor needs to be devised etc. 
