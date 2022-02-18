@@ -4,7 +4,7 @@
 
 
 
-Walk.destroy()
+Walk.destroy_all
 
 puts ('Creating a testing walk seed.')
 
@@ -15,6 +15,7 @@ puts ('Creating a testing walk seed.')
 
 
 w1 = Walk.create!(
+    status: 1,
     cost: 10,
     duration: 30,
     special_instruction: 'he is aggressive with other larger dogs.'
