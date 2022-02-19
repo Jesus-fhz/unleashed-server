@@ -3,8 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token, raise: false
 
-  # before_action :authenticate_user
-
+  # before_action :authenticate_user TODO: put in the route at the top here. 
   def current
     render json: current_user
   end
@@ -38,7 +37,7 @@ class UsersController < ApplicationController
   def show_nearby_walkers
     @all_walkers = User.walker # modify this to only show the ones within geocode range
     @nearby_walkers = @all_walkers.near([-33.870344, 151.271986])
-    
+
     render :json => @nearby_walkers 
   end
 

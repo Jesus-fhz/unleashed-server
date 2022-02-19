@@ -2,7 +2,7 @@ require 'colorize'
 require 'json'
 
 # Dog breed JSON hashes
-
+#TODO: we can probably loop over all the files in a folder to do this. 
 akita_json = File.read('db/json/akita.json')
 akita_images = JSON.parse(akita_json)
 
