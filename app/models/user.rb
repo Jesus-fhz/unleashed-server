@@ -1,12 +1,14 @@
 class User < ApplicationRecord
 
+  # User associations
   has_many :pets
   has_many :walks # only for user_type: 'walker'
-
-  enum user_type: { walker: 0, owner: 1 }
   
+  has_secure_password
+  
+  # Enum settings for validation
+  enum user_type: { walker: 0, owner: 1 }
   USERTYPES = [:walker, :owner]
-
   validates :user_type, presence: true
 
   # FIXME: Ask Luke why the line below line does not work as intended. It should refer to usertypes variable above and validate entries on form submit. It just seems to make the DB not accept either owner or walker as an option anymore.

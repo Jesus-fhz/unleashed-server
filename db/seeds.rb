@@ -56,10 +56,16 @@ random_first_names = ['Olivia', 'Liam', 'Emma', 'Noah', 'Amelia', 'Oliver', 'Ava
 random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer', 'Schumacher', 'West', 'de Santa Maria', 'Qi-Doyle', 'Wu', 'Jones', 'Prabhakaran']
 
 # create users with random names
+
+print "Creating Users..."
+
 20.times do |u|
+    
     user = 'user'+(u+1).to_s
-    user = User.create!
+    user = User.create!(password:'chicken')
     user.name = (random_first_names.sample + ' ' + random_last_names.sample)
+    user.profile_image = 'http://www.fillmurray.com/400/400'
+    user.email = 'testuser'+(u).to_s+'@gmail.com'
     if rand() < 0.4
         user.user_type = 1
     else
