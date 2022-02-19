@@ -79,8 +79,8 @@ random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer',
     user.save
 end
 
-puts "Success! We have #{User.owner.count} owners in the DB: #{User.owner.count}".green
-puts "Success! We have #{User.walker.count} walkers in the DB: #{User.walker.count}"
+puts "Success! We have #{User.owner.count} owners in the DB.".green
+puts "Success! We have #{User.walker.count} walkers in the DB".green
 puts "Success! #{ User.count } random users created.".green
 
 puts "Creating seed pets...".yellow
@@ -151,6 +151,7 @@ random_dog_breeds = ['Akita', 'Beagle', 'Boxer', 'Chihuahua', 'Dachshund', 'Ding
         randomPet.image = weimaraner_images['message'][rand(akita_images.count)]
     end
 
+    # Other pet details
     randomPet.age = rand(1..15)
     randomPet.size = ['Small', 'Medium', 'Large'].sample
     randomPet.desexed = [true, false].sample

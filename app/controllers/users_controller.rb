@@ -20,6 +20,12 @@ class UsersController < ApplicationController
     @user_pets = User.find(params[:id]).pets
     render :json => @user_pets
   end
+
+  def show_user_walks
+    headers['Access-Control-Allow-Origin'] = '*'
+    @user_walks = User.find(params[:id]).walks
+    render :json => @user_walks
+  end
   
   # renders an array of the users that are walkers within a range of the input 'lat' & 'lng'
   # GET /users/find/:lat/:lng TODO: DO THE TESTING FOR THIS ROUTE
