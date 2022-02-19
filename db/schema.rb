@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_19_064259) do
+ActiveRecord::Schema.define(version: 2022_02_19_131139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2022_02_19_064259) do
     t.string "address"
     t.boolean "is_available"
     t.float "earnings"
-    t.float "geocode_lat"
-    t.float "geocode_lng"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "email"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 2022_02_19_064259) do
     t.integer "status", default: 0
     t.float "cost"
     t.float "duration"
-    t.float "geocode_lat"
-    t.float "geocode_lng"
+    t.float "latitude"
+    t.float "longitude"
     t.text "special_instruction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
