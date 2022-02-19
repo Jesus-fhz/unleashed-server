@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 
   # TODO: GET /users/:lat/:lng
   # This api call will get an array of users that are within a range of the geocode 
+  # User.walker.all  is an enum method that will show all 
 
   # POST /users or /users.json
   def create
