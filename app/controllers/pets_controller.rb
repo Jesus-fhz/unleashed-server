@@ -1,27 +1,39 @@
 class PetsController < ApplicationController
+
   skip_before_action :verify_authenticity_token,  raise: false
   before_action :set_pet, only: %i[ show edit update destroy ]
 
   # GET /pets or /pets.json
   def index
+    headers['Access-Control-Allow-Origin'] = '*'
     @pets = Pet.all
   end
 
   # GET /pets/1 or /pets/1.json
   def show
+    headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+  def show_pet_walks
+    headers['Access-Control-Allow-Origin'] = '*'
+    @pet_walks = Pet.find(params[:id]).walks
+    render :json => @pet_walks
   end
 
   # GET /pets/new
   def new
+    headers['Access-Control-Allow-Origin'] = '*'
     @pet = Pet.new
   end
 
   # GET /pets/1/edit
   def edit
+    headers['Access-Control-Allow-Origin'] = '*'
   end
 
   # POST /pets or /pets.json
   def create
+    headers['Access-Control-Allow-Origin'] = '*'
     @pet = Pet.new(pet_params)
 
     respond_to do |format|
@@ -37,6 +49,7 @@ class PetsController < ApplicationController
 
   # PATCH/PUT /pets/1 or /pets/1.json
   def update
+    headers['Access-Control-Allow-Origin'] = '*'
     respond_to do |format|
       if @pet.update(pet_params)
         format.html { redirect_to pet_url(@pet), notice: "Pet was successfully updated." }
@@ -50,6 +63,7 @@ class PetsController < ApplicationController
 
   # DELETE /pets/1 or /pets/1.json
   def destroy
+    headers['Access-Control-Allow-Origin'] = '*'
     @pet.destroy
 
     respond_to do |format|

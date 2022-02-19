@@ -3,6 +3,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token, raise: false
 
+  before_action :authenticate_user
+
+  def current
+    render json: current_user
+  end
+
   # GET /users or /users.json
   def index
     headers['Access-Control-Allow-Origin'] = '*'
@@ -19,6 +25,12 @@ class UsersController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
     @user_pets = User.find(params[:id]).pets
     render :json => @user_pets
+  end
+
+  def show_user_walks
+    headers['Access-Control-Allow-Origin'] = '*'
+    @user_walks = User.find(params[:id]).walks
+    render :json => @user_walks
   end
   
   # renders an array of the users that are walkers within a range of the input 'lat' & 'lng'
