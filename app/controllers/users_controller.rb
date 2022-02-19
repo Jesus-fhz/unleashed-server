@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
     @users = User.all
   end
-
+  
   # GET /users/1 or /users/1.json
   def show
     headers['Access-Control-Allow-Origin'] = '*'
@@ -20,8 +20,18 @@ class UsersController < ApplicationController
     @user_pets = User.find(params[:id]).pets
     render :json => @user_pets
   end
+  
+  # renders an array of the users that are walkers within a range of the input 'lat' & 'lng'
+  # GET /users/find/:lat/:lng
+  def show_nearby_walkers
+    @all_walkers = User.walker # modify this to only show the ones within geocode range
+    lat_range = (params["lat"] - 0.00001)..(params["lat"] + 0.00001) #TODO: consider changing this value later on
+    lng_range = (params["lng"] - 0.00001)..(params["lng"] + 0.00001)
 
-  def 
+    @nearby_walkers = @all_walkers.where( geocode_lat: lat_range, geocode_lng: lng_range)
+    
+    render json 
+  end
 
   # GET /users/new
   def new
@@ -34,21 +44,7 @@ class UsersController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
   end
 
-  # renders an array of the users that are walkers within a range of the input 'lat' & 'lng'
-  # GET /users/find/:lat/:lng
-  def show_nearby_walkers
-    @all_walkers = User.walker # modify this to only show the ones within geocode range
-    lat_range = (params["lat"] - 0.00001)..(params["lat"] + 0.00001) #TODO: consider changing this value later on
-    lng_range = (params["lng"] - 0.00001)..(params["lng"] + 0.00001)
-
-    @nearby_walkers = @all_walkers.where( geocode_lat: lat_range, geocode_lng: lng_range)
-    
-    render json 
-  end
   
-  # This api call will get an array of users that are within a range of the geocode 
-  # User.walker.all  is an enum method that will show all 
-
   # POST /users or /users.json
   def create
     headers['Access-Control-Allow-Origin'] = '*'
