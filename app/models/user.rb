@@ -20,6 +20,7 @@ class User < ApplicationRecord
     lat = data["lat"].to_f
     lng = data["lng"].to_f
     
+    {lat: lat, lng: lng}
     # TODO: even figure out how to make it a constructor method. 
   end
 end

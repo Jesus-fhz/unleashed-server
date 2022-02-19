@@ -55,33 +55,32 @@ User.destroy_all
 random_first_names = ['Olivia', 'Liam', 'Emma', 'Noah', 'Amelia', 'Oliver', 'Ava', 'Elijah', 'Sophia', 'Lucas', 'Charlotte', 'Levi', 'Isabella', 'Mason', 'Mia', 'Asher', 'Luna', 'James', 'Harper', 'Ethan', 'Gianna', 'Mateo', 'Evelyn', 'Leo', 'Aria', 'Jack', 'Ella', 'Benjamin', 'Ellie', 'Aiden', 'Mila', 'Logan']
 random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer', 'Schumacher', 'West', 'de Santa Maria', 'Qi-Doyle', 'Wu', 'Jones', 'Prabhakaran']
 
-owner_array = []
-walker_array = []
-
+# create users with random names
 20.times do |u|
-    randomUser = 'user'+(u+1).to_s
-    randomUser = User.create!
-    randomUser.name = (random_first_names.sample + ' ' + random_last_names.sample)
+    user = 'user'+(u+1).to_s
+    user = User.create!
+    user.name = (random_first_names.sample + ' ' + random_last_names.sample)
     if rand() < 0.4
-        randomUser.user_type = 1
-        owner_array.push randomUser.id
+        user.user_type = 1
     else
-        randomUser.user_type = 0
-        walker_array.push randomUser.id
+        user.user_type = 0
     end
     if rand() < 0.1
-        randomUser.is_available = false
+        user.is_available = false
     else
-        randomUser.is_available = true
+        user.is_available = true
     end
-    randomUser.earnings = rand(100..2000)
-    randomUser.address = rand(100..200).to_s + ' New South Head Road, Sydney NSW'
+    user.earnings = rand(100..2000)
+    user.address = rand(100..200).to_s + ' New South Head Road, Sydney NSW, Australia'
+    coords = User.address_to_geocode(user.address)
 
-    randomUser.save
+    user.geocode_lat = coords[:lat]
+    user.geocode_lng = coords[:lng]
+    user.save
 end
 
-puts "Success! We have #{owner_array.count} owners in the DB: #{owner_array}".green
-puts "Success! We have #{walker_array.count} walkers in the DB: #{walker_array}"
+puts "Success! We have #{User.owner.count} owners in the DB: #{User.owner.count}".green
+puts "Success! We have #{User.walker.count} walkers in the DB: #{User.walker.count}"
 puts "Success! #{ User.count } random users created.".green
 
 puts "Creating seed pets...".yellow
@@ -92,11 +91,15 @@ random_male_pet_names = ['Bailey', 'Max', 'Charlie', 'Buddy', 'Rocky', 'Jake', '
 random_female_pet_names = ['Zoey', 'Belle', 'Madison', 'Lily', 'Brandy', 'Roxie', 'Ruby', 'Neela', 'Princess', 'Bella', 'Lucy', 'Pea', 'Jia', 'Angela', 'Cassie', 'Ro', 'Maggie', 'Sophie', 'Ginger', 'Coco', 'Sasha', 'Angel', 'Princess']
 random_dog_breeds = ['Akita', 'Beagle', 'Boxer', 'Chihuahua', 'Dachshund', 'Dingo', 'Kelpie', 'Leonberg', 'Maltese', 'Papillon', 'Pekinese', 'Pug', 'Shiba', 'Shihtzu', 'Weimaraner']
 
-(owner_array.count).times do |p|
-
+# Create the Pet 
+(User.owner.count).times do |p|
+    
     randomPet = 'pet'+(p+1).to_s
     randomPet = Pet.create!
 
+    # Give the pet a user with user_type: owner
+    randomPet.user_id = User.owner[p].id
+    
     # Is the pet male or female?
     if rand() < 0.5
         randomPet.is_male = true
@@ -111,8 +114,10 @@ random_dog_breeds = ['Akita', 'Beagle', 'Boxer', 'Chihuahua', 'Dachshund', 'Ding
         randomPet.name = random_female_pet_names.sample
     end
 
+    # What breed is the dog?
     randomPet.breed = random_dog_breeds.sample
 
+    # Assign an image that is relevant to the dogs breed
     case randomPet.breed
     when 'Akita'
         randomPet.image = akita_images['message'][rand(akita_images.count)]
@@ -146,13 +151,7 @@ random_dog_breeds = ['Akita', 'Beagle', 'Boxer', 'Chihuahua', 'Dachshund', 'Ding
         randomPet.image = weimaraner_images['message'][rand(akita_images.count)]
     end
 
-
-    randomPet.image
-
-    randomPet.user_id = owner_array[p]
-
     randomPet.age = rand(1..15)
-
     randomPet.size = ['Small', 'Medium', 'Large'].sample
     randomPet.desexed = [true, false].sample
     randomPet.can_walk_offleash = [true, false].sample
@@ -170,14 +169,35 @@ Walk.destroy_all
 puts ('Creating seed walks...').blue
 
 w1 = Walk.create!(
+    pet_id: Pet.first.id,
+    user_id: User.walker.first.id,
     status: 1,
     cost: 10,
     duration: 30,
     special_instruction: 'he is aggressive with other larger dogs.'
 )
 
+w2 = Walk.create!(
+    pet_id: Pet.second.id,
+    user_id: User.walker.second.id,
+    status: 2,
+    cost: 11,
+    duration: 30,
+    special_instruction: 'he is aggressive with other larger dogs.'
+)
+
+w3 = Walk.create!(
+    pet_id: Pet.third.id,
+    user_id: User.walker.third.id,
+    status: 0,
+    cost: 100,
+    duration: 60,
+    special_instruction: 'he is aggressive with other larger dogs.'
+)
+
 puts "Success! #{ Walk.count } random walks created.".blue
 
 
+#TODO: figure out how to exactly when the location duration infor needs to be devised etc.
 
-#TODO: figure out how to exactly when the location duration infor needs to be devised etc. 
+# TODO: add the geocodes to 
