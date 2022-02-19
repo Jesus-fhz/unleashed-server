@@ -2,7 +2,7 @@ require 'colorize'
 require 'json'
 
 # Dog breed JSON hashes
-
+#TODO: we can probably loop over all the files in a folder to do this. 
 akita_json = File.read('db/json/akita.json')
 akita_images = JSON.parse(akita_json)
 
@@ -60,7 +60,6 @@ random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer',
 print "Creating Users..."
 
 20.times do |u|
-    
     user = 'user'+(u+1).to_s
     user = User.create!(password:'chicken')
     user.name = (random_first_names.sample + ' ' + random_last_names.sample)
@@ -79,9 +78,9 @@ print "Creating Users..."
     user.earnings = rand(100..2000)
     user.address = rand(1..1000).to_s + ' New South Head Road, Sydney NSW, Australia'
     coords = User.address_to_geocode(user.address)
+    user.geocode_lat = coords["lat"]
+    user.geocode_lng = coords["lng"]
 
-    user.geocode_lat = coords[:lat]
-    user.geocode_lng = coords[:lng]
     user.save
 end
 
