@@ -33,8 +33,6 @@ class UsersController < ApplicationController
     render json 
   end
 
-  def 
-
   # GET /users/new
   def new
     headers['Access-Control-Allow-Origin'] = '*'
