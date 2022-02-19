@@ -65,7 +65,4 @@ class Walk < ApplicationRecord
             rental.save
         end
     end
-
 end
-
-
