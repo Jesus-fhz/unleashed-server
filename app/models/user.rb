@@ -17,6 +17,7 @@ class User < ApplicationRecord
   
   # figure out how to update the values of the table row given the address. 
   def self.address_to_geocode address
+    
     data = Geocoder.search(address).first.data
     
     {lat: data["lat"].to_f, lng: data["lon"].to_f}

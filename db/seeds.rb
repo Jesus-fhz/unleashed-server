@@ -77,7 +77,7 @@ print "Creating Users..."
         user.is_available = true
     end
     user.earnings = rand(100..2000)
-    user.address = rand(100..200).to_s + ' New South Head Road, Sydney NSW, Australia'
+    user.address = rand(1..1000).to_s + ' New South Head Road, Sydney NSW, Australia'
     coords = User.address_to_geocode(user.address)
 
     user.geocode_lat = coords[:lat]
