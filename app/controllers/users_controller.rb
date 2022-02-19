@@ -3,8 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token, raise: false
 
-  before_action :authenticate_user
-
+  # before_action :authenticate_user TODO: put in the route at the top here. 
   def current
     render json: current_user
   end
@@ -37,11 +36,8 @@ class UsersController < ApplicationController
   # GET /users/find/:lat/:lng TODO: DO THE TESTING FOR THIS ROUTE
   def show_nearby_walkers
     @all_walkers = User.walker # modify this to only show the ones within geocode range
-    lat_range = (params["lat"] - 0.00001)..(params["lat"] + 0.00001) #TODO: consider changing this value later on
-    lng_range = (params["lng"] - 0.00001)..(params["lng"] + 0.00001)
+    @nearby_walkers = @all_walkers.near([-33.870344, 151.271986])
 
-    @nearby_walkers = @all_walkers.where( geocode_lat: lat_range, geocode_lng: lng_range)
-    
     render :json => @nearby_walkers 
   end
 
