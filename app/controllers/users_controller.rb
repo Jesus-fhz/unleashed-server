@@ -19,6 +19,9 @@ class UsersController < ApplicationController
   def edit
   end
 
+  # TODO: GET /users/:lat/:lng
+  # This api call will get an array of users that are within a range of the geocode 
+
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
