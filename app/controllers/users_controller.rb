@@ -10,6 +10,12 @@ class UsersController < ApplicationController
   def show
   end
 
+  # GET /users/:id/pets
+  def show_owned_pets
+    @user_pets = User.find(params[:id]).pets
+    render :json => @user_pets
+  end
+
   # GET /users/new
   def new
     @user = User.new

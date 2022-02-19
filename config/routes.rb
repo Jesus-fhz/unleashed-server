@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get '/users/:id/pets' => 'users#show_owned_pets'
+
   resources :pets
   resources :users
   resources :walks
