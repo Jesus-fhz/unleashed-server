@@ -60,7 +60,6 @@ random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer',
 print "Creating Users..."
 
 20.times do |u|
-    
     user = 'user'+(u+1).to_s
     user = User.create!(password:'chicken')
     user.name = (random_first_names.sample + ' ' + random_last_names.sample)
@@ -77,11 +76,12 @@ print "Creating Users..."
         user.is_available = true
     end
     user.earnings = rand(100..2000)
-    user.address = rand(100..200).to_s + ' New South Head Road, Sydney NSW, Australia'
-    coords = User.address_to_geocode(user.address)
 
-    user.geocode_lat = coords[:lat]
-    user.geocode_lng = coords[:lng]
+    user.address = rand(100..300).to_s + ' New South Head Road, Sydney NSW, Australia'
+    coords = User.address_to_geocode(user.address)
+    user.geocode_lat = coords["lat"]
+    user.geocode_lng = coords["lng"]
+
     user.save
 end
 
