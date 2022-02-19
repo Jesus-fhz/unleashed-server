@@ -1,4 +1,8 @@
 class Walk < ApplicationRecord
+
+    belongs_to :pet, optional: true
+    belongs_to :user, optional: true
+
     enum status: [:pending, :accepted, :ongoing, :finished] # maybe cancelled
     STATUSES = [:pending, :accepted, :ongoing, :finished]
     validates :status, presence: true

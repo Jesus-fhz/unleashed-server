@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 
+  has_many :pets
+  has_many :walks # only for user_type: 'walker'
+
   enum user_type: { walker: 0, owner: 1 }
   
   USERTYPES = [:walker, :owner]
