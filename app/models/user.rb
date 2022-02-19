@@ -17,10 +17,7 @@ class User < ApplicationRecord
   def self.address_to_geocode address
     data = Geocoder.search(address).first.data
     
-    lat = data["lat"].to_f
-    lng = data["lng"].to_f
-    
-    {lat: lat, lng: lng}
+    {lat: data["lat"].to_f, lng: data["lon"].to_f}
     # TODO: even figure out how to make it a constructor method. 
   end
 end
