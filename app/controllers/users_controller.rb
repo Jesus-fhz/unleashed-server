@@ -1,28 +1,37 @@
 class UsersController < ApplicationController
+
   before_action :set_user, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token, raise: false
 
   # GET /users or /users.json
   def index
+    headers['Access-Control-Allow-Origin'] = '*'
     @users = User.all
   end
 
   # GET /users/1 or /users/1.json
   def show
+    headers['Access-Control-Allow-Origin'] = '*'
   end
 
   # GET /users/:id/pets
   def show_owned_pets
+    headers['Access-Control-Allow-Origin'] = '*'
     @user_pets = User.find(params[:id]).pets
     render :json => @user_pets
   end
 
+  def 
+
   # GET /users/new
   def new
+    headers['Access-Control-Allow-Origin'] = '*'
     @user = User.new
   end
 
   # GET /users/1/edit
   def edit
+    headers['Access-Control-Allow-Origin'] = '*'
   end
 
   # TODO: GET /users/:lat/:lng
@@ -31,6 +40,7 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
+    headers['Access-Control-Allow-Origin'] = '*'
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -46,6 +56,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    headers['Access-Control-Allow-Origin'] = '*'
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
@@ -59,6 +70,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
+    headers['Access-Control-Allow-Origin'] = '*'
     @user.destroy
 
     respond_to do |format|
