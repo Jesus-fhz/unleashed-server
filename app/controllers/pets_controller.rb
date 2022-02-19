@@ -1,4 +1,5 @@
 class PetsController < ApplicationController
+  skip_before_action :verify_authenticity_token,  raise: false
   before_action :set_pet, only: %i[ show edit update destroy ]
 
   # GET /pets or /pets.json
