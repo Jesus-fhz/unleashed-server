@@ -3,8 +3,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token, raise: false
 
+<<<<<<< HEAD
   # before_action :authenticate_user
 
+=======
+  # before_action :authenticate_user TODO: put in the route at the top here. 
+>>>>>>> trying-google-geocoder
   def current
     render json: current_user
   end
@@ -37,11 +41,13 @@ class UsersController < ApplicationController
   # GET /users/find/:lat/:lng TODO: DO THE TESTING FOR THIS ROUTE
   def show_nearby_walkers
     @all_walkers = User.walker # modify this to only show the ones within geocode range
+<<<<<<< HEAD
     lat_range = (params["lat"].to_f - 0.0001)..(params["lat"].to_f + 0.0001) #TODO: consider changing this value later on
     lng_range = (params["lng"].to_f - 0.0001)..(params["lng"].to_f + 0.0001)
+=======
+    @nearby_walkers = @all_walkers.near([-33.870344, 151.271986])
+>>>>>>> trying-google-geocoder
 
-    @nearby_walkers = @all_walkers.where( geocode_lat: lat_range, geocode_lng: lng_range)
-    
     render :json => @nearby_walkers 
   end
 
