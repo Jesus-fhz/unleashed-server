@@ -19,7 +19,18 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # TODO: GET /users/:lat/:lng
+  # renders an array of the users that are walkers within a range of the input 'lat' & 'lng'
+  # GET /users/find/:lat/:lng
+  def show_nearby_walkers
+    @all_walkers = User.walker # modify this to only show the ones within geocode range
+    lat_range = (params["lat"] - 0.00001)..(params["lat"] + 0.00001) #TODO: consider changing this value later on
+    lng_range = (params["lng"] - 0.00001)..(params["lng"] + 0.00001)
+
+    @nearby_walkers = @all_walkers.where( geocode_lat: lat_range, geocode_lng: lng_range)
+    
+    render json 
+  end
+  
   # This api call will get an array of users that are within a range of the geocode 
   # User.walker.all  is an enum method that will show all 
 
