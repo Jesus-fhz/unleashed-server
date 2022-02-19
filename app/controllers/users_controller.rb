@@ -37,8 +37,8 @@ class UsersController < ApplicationController
   # GET /users/find/:lat/:lng TODO: DO THE TESTING FOR THIS ROUTE
   def show_nearby_walkers
     @all_walkers = User.walker # modify this to only show the ones within geocode range
-    lat_range = (params["lat"] - 0.00001)..(params["lat"] + 0.00001) #TODO: consider changing this value later on
-    lng_range = (params["lng"] - 0.00001)..(params["lng"] + 0.00001)
+    lat_range = (params["lat"].to_f - 0.00001)..(params["lat"].to_f + 0.00001) #TODO: consider changing this value later on
+    lng_range = (params["lng"].to_f - 0.00001)..(params["lng"].to_f + 0.00001)
 
     @nearby_walkers = @all_walkers.where( geocode_lat: lat_range, geocode_lng: lng_range)
     
