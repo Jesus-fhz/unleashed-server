@@ -1,4 +1,52 @@
 require 'colorize'
+require 'json'
+
+# Dog breed JSON hashes
+
+akita_json = File.read('db/json/akita.json')
+akita_images = JSON.parse(akita_json)
+
+beagle_json = File.read('db/json/beagle.json')
+beagle_images = JSON.parse(beagle_json)
+
+boxer_json = File.read('db/json/boxer.json')
+boxer_images = JSON.parse(boxer_json)
+
+chihuahua_json = File.read('db/json/chihuahua.json')
+chihuahua_images = JSON.parse(chihuahua_json)
+
+dachshund_json = File.read('db/json/dachshund.json')
+dachshund_images = JSON.parse(dachshund_json)
+
+dingo_json = File.read('db/json/dingo.json')
+dingo_images = JSON.parse(dingo_json)
+
+kelpie_json = File.read('db/json/kelpie.json')
+kelpie_images = JSON.parse(kelpie_json)
+
+leonberg_json = File.read('db/json/leonberg.json')
+leonberg_images = JSON.parse(leonberg_json)
+
+maltese_json = File.read('db/json/maltese.json')
+maltese_images = JSON.parse(maltese_json)
+
+papillon_json = File.read('db/json/papillon.json')
+papillon_images = JSON.parse(papillon_json)
+
+pekinese_json = File.read('db/json/pekinese.json')
+pekinese_images = JSON.parse(pekinese_json)
+
+pug_json = File.read('db/json/pug.json')
+pug_images = JSON.parse(pug_json)
+
+shiba_json = File.read('db/json/shiba.json')
+shiba_images = JSON.parse(shiba_json)
+
+shihtzu_json = File.read('db/json/shihtzu.json')
+shihtzu_images = JSON.parse(shihtzu_json)
+
+weimaraner_json = File.read('db/json/weimaraner.json')
+weimaraner_images = JSON.parse(weimaraner_json)
 
 puts "Creating seed users...".green
 
@@ -42,7 +90,7 @@ Pet.destroy_all
 
 random_male_pet_names = ['Bailey', 'Max', 'Charlie', 'Buddy', 'Rocky', 'Jake', 'Jack', 'Simba', 'Toby', 'Buster', 'Duke', 'Cooper', 'Riley', 'Harley', 'Bear', 'Oscar', 'Teddy', 'Winston', 'Sammy', 'Rusty', 'Gizmo', 'Bandit', 'Jackson', 'Milo', 'Gus']
 random_female_pet_names = ['Zoey', 'Belle', 'Madison', 'Lily', 'Brandy', 'Roxie', 'Ruby', 'Neela', 'Princess', 'Bella', 'Lucy', 'Pea', 'Jia', 'Angela', 'Cassie', 'Ro', 'Maggie', 'Sophie', 'Ginger', 'Coco', 'Sasha', 'Angel', 'Princess']
-random_dog_breeds = ['French Bulldog', 'King Charles Spaniel', 'German Shepherd', 'Beagle', 'Rottweiler', 'Dachshund', 'Yorkshire Terrier', 'Great Dane', 'Doberman Pinscher', 'Shih Tzu', 'Pomeranian', 'Shetland Sheepdog', 'Pug', 'Chihuahua', 'Maltese', 'Shiba Inu', 'Newfoundland', 'Irish Wolfhound', 'Akita', 'St Bernard']
+random_dog_breeds = ['Akita', 'Beagle', 'Boxer', 'Chihuahua', 'Dachshund', 'Dingo', 'Kelpie', 'Leonberg', 'Maltese', 'Papillon', 'Pekinese', 'Pug', 'Shiba', 'Shihtzu', 'Weimaraner']
 
 (owner_array.count).times do |p|
 
@@ -63,11 +111,46 @@ random_dog_breeds = ['French Bulldog', 'King Charles Spaniel', 'German Shepherd'
         randomPet.name = random_female_pet_names.sample
     end
 
-    randomPet.image = 'http://placedog.com/300/300'
+    randomPet.breed = random_dog_breeds.sample
+
+    case randomPet.breed
+    when 'Akita'
+        randomPet.image = akita_images['message'][rand(akita_images.count)]
+    when 'Beagle'
+        randomPet.image = beagle_images['message'][rand(beagle_images.count)]
+    when 'Boxer'
+        randomPet.image = boxer_images['message'][rand(boxer_images.count)]
+    when 'Chihuahua'
+        randomPet.image = chihuahua_images['message'][rand(chihuahua_images.count)]
+    when 'Dachshund'
+        randomPet.image = dachshund_images['message'][rand(dachshund_images.count)]
+    when 'Dingo'
+        randomPet.image = dingo_images['message'][rand(dingo_images.count)]
+    when 'Kelpie'
+        randomPet.image = kelpie_images['message'][rand(kelpie_images.count)]
+    when 'Leonberg'
+        randomPet.image = leonberg_images['message'][rand(leonberg_images.count)]
+    when 'Maltese'
+        randomPet.image = maltese_images['message'][rand(maltese_images.count)]
+    when 'Papillon'
+        randomPet.image = papillon_images['message'][rand(papillon_images.count)]
+    when 'Pekinese'
+        randomPet.image = pekinese_images['message'][rand(pekinese_images.count)]
+    when 'Pug'
+        randomPet.image = pug_images['message'][rand(pug_images.count)]
+    when 'Shiba'
+        randomPet.image = shiba_images['message'][rand(shiba_images.count)]
+    when 'Shihtzu'
+        randomPet.image = shihtzu_images['message'][rand(shihtzu_images.count)]
+    when 'Weimaraner'
+        randomPet.image = weimaraner_images['message'][rand(akita_images.count)]
+    end
+
+
+    randomPet.image
 
     randomPet.user_id = owner_array[p]
 
-    randomPet.breed = random_dog_breeds.sample
     randomPet.age = rand(1..15)
 
     randomPet.size = ['Small', 'Medium', 'Large'].sample
