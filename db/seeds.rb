@@ -7,9 +7,6 @@ User.destroy_all
 random_first_names = ['Olivia', 'Liam', 'Emma', 'Noah', 'Amelia', 'Oliver', 'Ava', 'Elijah', 'Sophia', 'Lucas', 'Charlotte', 'Levi', 'Isabella', 'Mason', 'Mia', 'Asher', 'Luna', 'James', 'Harper', 'Ethan', 'Gianna', 'Mateo', 'Evelyn', 'Leo', 'Aria', 'Jack', 'Ella', 'Benjamin', 'Ellie', 'Aiden', 'Mila', 'Logan']
 random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer', 'Schumacher', 'West', 'de Santa Maria', 'Qi-Doyle', 'Wu', 'Jones', 'Prabhakaran']
 
-
-# TODO: get make some walk objects
-
 # create users with random names
 20.times do |u|
     user = 'user'+(u+1).to_s
@@ -26,8 +23,11 @@ random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer',
         user.is_available = true
     end
     user.earnings = rand(100..2000)
-    user.address = rand(100..200).to_s + ' New South Head Road, Sydney NSW'
+    user.address = rand(100..200).to_s + ' New South Head Road, Sydney NSW, Australia'
+    coords = User.address_to_geocode(user.address)
 
+    user.geocode_lat = coords[:lat]
+    user.geocode_lng = coords[:lng]
     user.save
 end
 
@@ -113,6 +113,7 @@ w3 = Walk.create!(
 )
 
 puts "Success! #{ Walk.count } random walks created.".blue
+
 
 #TODO: figure out how to exactly when the location duration infor needs to be devised etc.
 
