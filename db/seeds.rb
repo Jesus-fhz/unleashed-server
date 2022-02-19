@@ -199,5 +199,3 @@ puts "Success! #{ Walk.count } random walks created.".blue
 
 
 #TODO: figure out how to exactly when the location duration infor needs to be devised etc.
-
-# TODO: add the geocodes to 
