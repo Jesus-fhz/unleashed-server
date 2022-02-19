@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_19_011611) do
+ActiveRecord::Schema.define(version: 2022_02_19_064259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(version: 2022_02_19_011611) do
     t.float "geocode_lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "email"
+    t.text "password_digest"
+    t.string "profile_image"
   end
 
   create_table "walks", force: :cascade do |t|

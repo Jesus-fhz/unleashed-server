@@ -3,6 +3,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token, raise: false
 
+  before_action :authenticate_user
+
+  def current
+    render json: current_user
+  end
+
   # GET /users or /users.json
   def index
     headers['Access-Control-Allow-Origin'] = '*'
