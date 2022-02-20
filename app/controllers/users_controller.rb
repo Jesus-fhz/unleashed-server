@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
   
   # renders an array of the users that are walkers within a range of the input 'lat' & 'lng'
-  # GET /users/find/:lat/:lng TODO: DO THE TESTING FOR THIS ROUTE
+  # GET /users/find/:lat/:lng
   def show_nearby_walkers
     @all_walkers = User.walker # modify this to only show the ones within geocode range
     @nearby_walkers = @all_walkers.near([-33.870344, 151.271986])
