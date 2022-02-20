@@ -91,10 +91,9 @@ i = 0;
     lng = center[:lng] + rand(-0.038..0.038)
 
     user = 'user'+(u+1).to_s
-    user = User.create!(password:'chicken')
+    user = User.create!(password:'chicken', email:'testuser'+(u).to_s+'@unleashed.com')
     user.name = (random_first_names.sample + ' ' + random_last_names.sample)
     user.profile_image = 'http://www.fillmurray.com/400/400'
-    user.email = 'testuser'+(u).to_s+'@gmail.com'
     if rand() < 0.4
         user.user_type = 1
     else
