@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token, raise: false
 
   # before_action :authenticate_user TODO: put in the route at the top here. 
+  before_action :authenticate_user, except: [:create]
+
   def current
     render json: current_user
   end
