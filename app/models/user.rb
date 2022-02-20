@@ -20,8 +20,8 @@ class User < ApplicationRecord
   # figure out how to update the values of the table row given the address. 
   def self.address_to_geocode address
     
-    # data = Geocoder.search(address).first.data # Note: this line was producing imprecise coordinates
     key = 'AIzaSyAm7vYw4jkC7m9hbEKpMfFxjwLAOZgxwko'
+    # data = Geocoder.search(address).first.data # Note: this line was producing imprecise coordinates
     url_address = (address).gsub(' ', '+');
     url = URI("https://maps.googleapis.com/maps/api/geocode/json?address=#{url_address}&key=#{key}");
     data = HTTParty.get(url)
@@ -32,6 +32,8 @@ class User < ApplicationRecord
     # {lat: data["lat"].to_f, lng: data["lon"].to_f}
     # TODO: even figure out how to make it a constructor method. 
   end
+
+
   # def self.address_to_geocode address
   #   data = Geocoder.search(address).first.data
     

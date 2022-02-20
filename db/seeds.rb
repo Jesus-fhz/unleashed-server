@@ -54,12 +54,17 @@ User.destroy_all
 
 random_first_names = ['Olivia', 'Liam', 'Emma', 'Noah', 'Amelia', 'Oliver', 'Ava', 'Elijah', 'Sophia', 'Lucas', 'Charlotte', 'Levi', 'Isabella', 'Mason', 'Mia', 'Asher', 'Luna', 'James', 'Harper', 'Ethan', 'Gianna', 'Mateo', 'Evelyn', 'Leo', 'Aria', 'Jack', 'Ella', 'Benjamin', 'Ellie', 'Aiden', 'Mila', 'Logan']
 random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer', 'Schumacher', 'West', 'de Santa Maria', 'Qi-Doyle', 'Wu', 'Jones', 'Prabhakaran']
+center = {lat: -33.895962, lng: 151.247408} 
+# TODO: make a function that generates codes within a range from a center point
 
-# create users with random names
+# create users with random names & addresses
 
 print "Creating Users..."
 
 20.times do |u|
+    lat = center[:lat] + rand(-0.038..0.038)
+    lng = center[:lng] + rand(-0.038..0.038)
+
     user = 'user'+(u+1).to_s
     user = User.create!(password:'chicken')
     user.name = (random_first_names.sample + ' ' + random_last_names.sample)
@@ -76,10 +81,11 @@ print "Creating Users..."
         user.is_available = true
     end
     user.earnings = rand(100..2000)
-    user.address = rand(1..1000).to_s + ' New South Head Road, Sydney NSW, Australia'
+    # byebug
+    user.address = Geocoder.search([lat, lng]).first.data["display_name"]
     coords = User.address_to_geocode(user.address)
-    user.geocode_lat = coords["lat"]
-    user.geocode_lng = coords["lng"]
+    user.latitude = lat
+    user.longitude = lng
 
     user.save
 end
@@ -95,6 +101,10 @@ Pet.destroy_all
 random_male_pet_names = ['Bailey', 'Max', 'Charlie', 'Buddy', 'Rocky', 'Jake', 'Jack', 'Simba', 'Toby', 'Buster', 'Duke', 'Cooper', 'Riley', 'Harley', 'Bear', 'Oscar', 'Teddy', 'Winston', 'Sammy', 'Rusty', 'Gizmo', 'Bandit', 'Jackson', 'Milo', 'Gus']
 random_female_pet_names = ['Zoey', 'Belle', 'Madison', 'Lily', 'Brandy', 'Roxie', 'Ruby', 'Neela', 'Princess', 'Bella', 'Lucy', 'Pea', 'Jia', 'Angela', 'Cassie', 'Ro', 'Maggie', 'Sophie', 'Ginger', 'Coco', 'Sasha', 'Angel', 'Princess']
 random_dog_breeds = ['Akita', 'Beagle', 'Boxer', 'Chihuahua', 'Dachshund', 'Dingo', 'Kelpie', 'Leonberg', 'Maltese', 'Papillon', 'Pekinese', 'Pug', 'Shiba', 'Shihtzu', 'Weimaraner']
+random_coords = []
+
+
+
 
 # Create the Pet 
 (User.owner.count).times do |p|

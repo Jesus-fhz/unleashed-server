@@ -25,6 +25,7 @@ class WalksController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
   end
 
+  #TODO: we need to make sure this has the associated user id to correctly assign information. 
   # POST /walks or /walks.json
   def create
     headers['Access-Control-Allow-Origin'] = '*'
