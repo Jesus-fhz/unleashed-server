@@ -54,12 +54,37 @@ User.destroy_all
 
 random_first_names = ['Olivia', 'Liam', 'Emma', 'Noah', 'Amelia', 'Oliver', 'Ava', 'Elijah', 'Sophia', 'Lucas', 'Charlotte', 'Levi', 'Isabella', 'Mason', 'Mia', 'Asher', 'Luna', 'James', 'Harper', 'Ethan', 'Gianna', 'Mateo', 'Evelyn', 'Leo', 'Aria', 'Jack', 'Ella', 'Benjamin', 'Ellie', 'Aiden', 'Mila', 'Logan']
 random_last_names = ['Doyle', 'Lord', 'Qi', 'Song', 'Flores', 'Zhang', 'Hammer', 'Schumacher', 'West', 'de Santa Maria', 'Qi-Doyle', 'Wu', 'Jones', 'Prabhakaran']
+addresses = [
+    "Royal Sydney Golf Club, Kent Road, Rose Bay, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2029, Australia",
+    "The Central Synagogue, 11-17, Bon Accord Avenue, Bondi Junction, Sydney, Waverley Council, Eastern Suburbs, New South Wales, 2026, Australia",
+    "MacPherson Street, Bronte, Sydney, Waverley Council, Eastern Suburbs, New South Wales, 2024, Australia",
+    "Boundary Street, Paddington, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2021, Australia",
+    "Comrie Memorial Fountain, Federation Way, Moore Park, Sydney, Council of the City of Sydney, New South Wales, 2021, Australia",
+    "Fred Hollow Reserve, Alison Road, Randwick, Sydney, Randwick City Council, Eastern Suburbs, New South Wales, 2031, Australia",
+    "Powell Lane, Coogee, Sydney, Randwick City Council, Eastern Suburbs, New South Wales, 2034, Australia",
+    "Joongah Street, Randwick, Sydney, Randwick City Council, Eastern Suburbs, New South Wales, 2031, Australia",
+    "Shark Island Wharf, Wunulla Road, Woollahra Point, Point Piper, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2027, Australia",
+    "Clark Island, Lindsay Avenue, Darling Point, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2027, Australia",
+    "Waverley Reservoir No. 3, Paul Street, Bondi Junction, Sydney, Waverley Council, Eastern Suburbs, New South Wales, 2022, Australia",
+    "Rose Bay Seaplane Base, Vickery Avenue, Rose Bay, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2029, Australia",
+    "Shark Island Wharf, Wunulla Road, Woollahra Point, Point Piper, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2027, Australia",
+    "Ben Buckler, North Bondi, Sydney, Waverley Council, Eastern Suburbs, New South Wales, 2026, Australia",
+    "Kuk Thai, 144, Queen Street, Woollahra, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2025, Australia",
+    "Rainbow Street, South Coogee, Sydney, Randwick City Council, Eastern Suburbs, New South Wales, 2034, Australia",
+    "Onslow Street, Rose Bay, Sydney, Waverley Council, Eastern Suburbs, New South Wales, 2029, Australia",
+    "Hermitage Foreshore Walk, Vaucluse, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2030, Australia",
+    "Black Street, Vaucluse, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2030, Australia",
+    "Royal Sydney Golf Club, Kent Road, Rose Bay, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2029, Australia",
+    # "Shark Island Wharf, Wunulla Road, Woollahra Point, Point Piper, Sydney, Woollahra Municipal Council, Eastern Suburbs, New South Wales, 2027, Australia",
+]
 center = {lat: -33.895962, lng: 151.247408} 
 # TODO: make a function that generates codes within a range from a center point
 
 # create users with random names & addresses
 
 print "Creating Users..."
+
+i = 0;
 
 20.times do |u|
     lat = center[:lat] + rand(-0.038..0.038)
@@ -82,12 +107,14 @@ print "Creating Users..."
     end
     user.earnings = rand(100..2000)
     # byebug
-    user.address = Geocoder.search([lat, lng]).first.data["display_name"]
+    # user.address = Geocoder.search([lat, lng]).first.data["display_name"]
+    user.address = addresses[i]
     coords = User.address_to_geocode(user.address)
     user.latitude = lat
     user.longitude = lng
 
     user.save
+    i += 1
 end
 
 puts "Success! We have #{User.owner.count} owners in the DB.".green
@@ -102,9 +129,6 @@ random_male_pet_names = ['Bailey', 'Max', 'Charlie', 'Buddy', 'Rocky', 'Jake', '
 random_female_pet_names = ['Zoey', 'Belle', 'Madison', 'Lily', 'Brandy', 'Roxie', 'Ruby', 'Neela', 'Princess', 'Bella', 'Lucy', 'Pea', 'Jia', 'Angela', 'Cassie', 'Ro', 'Maggie', 'Sophie', 'Ginger', 'Coco', 'Sasha', 'Angel', 'Princess']
 random_dog_breeds = ['Akita', 'Beagle', 'Boxer', 'Chihuahua', 'Dachshund', 'Dingo', 'Kelpie', 'Leonberg', 'Maltese', 'Papillon', 'Pekinese', 'Pug', 'Shiba', 'Shihtzu', 'Weimaraner']
 random_coords = []
-
-
-
 
 # Create the Pet 
 (User.owner.count).times do |p|
