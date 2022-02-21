@@ -122,6 +122,8 @@ User.create(
     name: 'admin',
     email: 'admin@outlook.com',
     password: 'chicken',
+    latitude: -33.895962,
+    longitude: 151.247408,
     profile_image: 'http://www.fillmurray.com/400/400',
     user_type: 1
 )
