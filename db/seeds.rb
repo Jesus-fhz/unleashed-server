@@ -94,19 +94,20 @@ i = 0;
     user = User.create!(password:'chicken', email:'testuser'+(u).to_s+'@unleashed.com')
     user.name = (random_first_names.sample + ' ' + random_last_names.sample)
     user.profile_image = 'http://www.fillmurray.com/400/400'
+    
     if rand() < 0.4
-        user.user_type = 1
+        user.user_type = 1 # for owner
     else
-        user.user_type = 0
+        user.user_type = 0 # for walker
+        if rand() < 0.1 
+            user.is_available = false
+        else
+            user.is_available = true
+        end
+
+        user.earnings = rand(100..2000)
     end
-    if rand() < 0.1
-        user.is_available = false
-    else
-        user.is_available = true
-    end
-    user.earnings = rand(100..2000)
-    # byebug
-    # user.address = Geocoder.search([lat, lng]).first.data["display_name"]
+
     user.address = addresses[i]
     coords = User.address_to_geocode(user.address)
     user.latitude = lat
@@ -115,6 +116,15 @@ i = 0;
     user.save
     i += 1
 end
+
+# Custom admin user. Currently with no priveleges
+User.create(
+    name: 'admin',
+    email: 'admin@outlook.com',
+    password: 'chicken',
+    profile_image: 'http://www.fillmurray.com/400/400',
+    user_type: 1
+)
 
 puts "Success! We have #{User.owner.count} owners in the DB.".green
 puts "Success! We have #{User.walker.count} walkers in the DB".green
