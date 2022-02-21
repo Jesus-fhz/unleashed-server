@@ -14,12 +14,14 @@ class WalksController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
   end
 
-  # GET /walks/pending/:lat/:lng
-  def show_pending #TODO: put in the param for range
+  # GET /walks/pending/:lat/:lng where lat and lng belong to Walker making the request
+  def show_pending # NOTE: this returns the walks and their pets wrapped in a hash
+    # create a hash to include pet aswell
     @walks = Walk.where(status: 0).near([params[:lat], params[:lng]], 3);
-
+    @pets = @walks.map{ |walk| walk.pet }
+    # RETURNS hash of {walks: & pet:}
     # need pet and 
-    render :json => @walks
+    render :json => {walks: @walks, pets: @pets}
   end
   
   # GET /walks/new
