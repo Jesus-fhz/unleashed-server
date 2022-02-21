@@ -3,8 +3,13 @@ Rails.application.routes.draw do
   get '/users/:id/pets' => 'users#show_owned_pets'
   get '/users/find/:lat/:lng' => 'users#show_nearby_walkers', constraints: { lat: /.*/, lng: /.*/ }
   get '/users/:id/walks' => 'users#show_user_walks'
-
+  get '/users/:id/walks/accepted' => 'users#show_user_walks'
   get '/pets/:id/walks' => 'pets#show_pet_walks'
+
+  get '/walks/:id/accepts' => 'walks#walker_accepts'
+  get '/walks/pending/:lat/:lng' => 'walks#show_pending'
+  
+
   
   #Get the login token from Knock
   post 'user_token' => 'user_token#create'
