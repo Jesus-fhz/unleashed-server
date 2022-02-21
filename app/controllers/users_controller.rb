@@ -19,6 +19,8 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show
     headers['Access-Control-Allow-Origin'] = '*'
+    @user = User.find(params[:id])
+    render :json => @user
   end
 
   # GET /users/:id/pets
@@ -105,6 +107,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :user_type, :address, :is_available, :earnings, :geocode_lat, :geocode_lng, :email, :profile_image, :password, :password_confirmation)
+      params.require(:user).permit(:name, :user_type, :address, :is_available, :earnings, :latitude, :longitude, :email, :profile_image, :password, :password_confirmation)
     end
 end
