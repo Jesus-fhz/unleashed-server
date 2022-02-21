@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token, raise: false
 
   # before_action :authenticate_user TODO: put in the route at the top here. 
-  before_action :authenticate_user, except: [:create, :show_nearby_walkers]
-
+  before_action :authenticate_user, except: [:create, :show_nearby_walkers, :show_owned_pets]
+  
   def current
     render json: current_user
   end
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
   # renders an array of the users that are walkers within a range of the input 'lat' & 'lng'
   # GET /users/find/:lat/:lng
   def show_nearby_walkers
+    headers['Access-Control-Allow-Origin'] = '*'
     @all_walkers = User.walker # modify this to only show the ones within geocode range
     @nearby_walkers = @all_walkers.near([-33.870344, 151.271986])
 
