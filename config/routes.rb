@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/pets/:id/walks' => 'pets#show_pet_walks'
 
   get '/walks/:id/accepts' => 'walks#walker_accepts'
-  get '/walks/pending/:lat/:lng' => 'walks#show_pending'
+  get '/walks/pending/:lat/:lng' => 'walks#show_pending', constraints: { lat: /.*/, lng: /.*/ }
   
 
   

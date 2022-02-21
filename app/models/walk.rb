@@ -1,5 +1,8 @@
 class Walk < ApplicationRecord
+    reverse_geocoded_by :latitude, :longitude
+    after_validation :geocode
 
+    
     belongs_to :pet, optional: true
     belongs_to :user, optional: true
 
@@ -15,7 +18,7 @@ class Walk < ApplicationRecord
         #1. 
         destination = ''
         origin = ''
-        
+
         origins.each do |o|
             origin += "#{o.street_address} #{o.suburb.name} NSW Australia".gsub(/\s/,'%20') + '%2CMA%7C'
         end
