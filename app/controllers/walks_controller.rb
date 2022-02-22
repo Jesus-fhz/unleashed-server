@@ -7,6 +7,11 @@ class WalksController < ApplicationController
   def index
     headers['Access-Control-Allow-Origin'] = '*'
     @walks = Walk.all
+    @pets = []
+    @walks.each do |el|
+       @pets.push(Pet.find el.pet_id)
+    end
+    render json: {walks: @walks, pets: @pets}
   end
 
   # GET /walks/1 or /walks/1.json
@@ -19,7 +24,6 @@ class WalksController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
     @walk = Walk.new
   end
-
   # GET /walks/1/edit
   def edit
     headers['Access-Control-Allow-Origin'] = '*'
@@ -66,6 +70,7 @@ class WalksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
