@@ -278,8 +278,8 @@ w5 = Walk.create!(
 )
 
 w6 = Walk.create!(
-    pet_id: Pet.sixth.id,
-    user_id: User.walker.sixth.id,
+    pet_id: Pet.fifth.id,
+    user_id: User.walker.fifth.id,
     status: 0,
     cost: 100,
     duration: 60,
