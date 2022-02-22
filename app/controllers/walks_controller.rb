@@ -19,6 +19,16 @@ class WalksController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
   end
 
+  # GET /walks/pending/:lat/:lng where lat and lng belong to Walker making the request
+  def show_pending # NOTE: this returns the walks and their pets wrapped in a hash
+    # create a hash to include pet aswell
+    @walks = Walk.where(status: 0).near([params[:lat], params[:lng]], 5, units: :km); # change 5 to whatever range you want
+    @pets = @walks.map{ |walk| walk.pet }
+    # RETURNS hash of {walks: & pet:}
+    # need pet and 
+    render :json => {walks: @walks, pets: @pets}
+  end
+  
   # GET /walks/new
   def new
     headers['Access-Control-Allow-Origin'] = '*'
@@ -58,6 +68,28 @@ class WalksController < ApplicationController
         format.json { render json: @walk.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  
+  # PATCH/PUT /walks/1/accepts TODO: NEED TO TEST
+  def walker_accepts
+    headers['Access-Control-Allow-Origin'] = '*'
+    @walk = Walk.find(params[:id])
+
+    if @walk.status = 0 # 0 is pending
+      @walk.status = 1
+      respond_to do |format|
+        if @walk.update(walk_params)
+          render :json => @walk 
+
+          # format.json { render :show, status: :ok, location: @walk }
+        else
+          format.json { render json: @walk.errors, status: :unprocessable_entity } # we can clean up the error handling here. 
+        end
+      end
+    else
+      #TODO: return an error message. 
+    end      
   end
 
   # DELETE /walks/1 or /walks/1.json

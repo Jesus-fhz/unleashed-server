@@ -1,10 +1,13 @@
 class Walk < ApplicationRecord
+    reverse_geocoded_by :latitude, :longitude
+    after_validation :geocode
 
+    
     belongs_to :pet, optional: true
     belongs_to :user, optional: true
 
-    enum status: [:pending, :accepted, :ongoing, :finished] # maybe cancelled
-    STATUSES = [:pending, :accepted, :ongoing, :finished]
+    enum status: [:pending, :accepted, :ongoing, :finished] # maybe cancelled 
+    STATUSES = [:pending, :accepted, :ongoing, :finished] # 0, 1, 2, 3
     validates :status, presence: true
     
     # 1. Converts all origin & destination addresses to the API query form
@@ -15,7 +18,7 @@ class Walk < ApplicationRecord
         #1. 
         destination = ''
         origin = ''
-        
+
         origins.each do |o|
             origin += "#{o.street_address} #{o.suburb.name} NSW Australia".gsub(/\s/,'%20') + '%2CMA%7C'
         end
