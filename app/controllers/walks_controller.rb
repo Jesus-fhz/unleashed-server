@@ -7,6 +7,9 @@ class WalksController < ApplicationController
   def index
     headers['Access-Control-Allow-Origin'] = '*'
     @walks = Walk.all
+    @pets = @walks.map{ |walk| walk.pet }
+
+    render :json => {walks: @walks, pets: @pets}
   end
 
   # GET /walks/1 or /walks/1.json
@@ -91,15 +94,17 @@ class WalksController < ApplicationController
 
     if @walk.status = 0 # 0 is pending
       @walk.status = 1
-      respond_to do |format|
+      # @walk.save
+
+      # respond_to do |format|
         if @walk.update(walk_params)
           render :json => @walk 
 
           # format.json { render :show, status: :ok, location: @walk }
         else
-          format.json { render json: @walk.errors, status: :unprocessable_entity } # we can clean up the error handling here. 
+          # json { render json: @walk.errors, status: :unprocessable_entity } # we can clean up the error handling here. 
         end
-      end
+      # end
     else
       #TODO: return an error message. 
     end      
