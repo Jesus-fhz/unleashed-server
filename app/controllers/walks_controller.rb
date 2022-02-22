@@ -38,7 +38,7 @@ class WalksController < ApplicationController
     respond_to do |format|
       if @walk.save
         format.html { redirect_to walk_url(@walk), notice: "Walk was successfully created." }
-        format.json { render :show, status: :created, location: @walk }
+        format.json { render json:@walk, status: :created, location: @walk }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @walk.errors, status: :unprocessable_entity }
