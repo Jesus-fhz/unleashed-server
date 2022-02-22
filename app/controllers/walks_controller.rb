@@ -15,6 +15,10 @@ class WalksController < ApplicationController
   # GET /walks/1 or /walks/1.json
   def show
     headers['Access-Control-Allow-Origin'] = '*'
+
+    @walk = Walk.find params[:id]
+
+    render :json => @walk
   end
 
 
@@ -49,6 +53,9 @@ class WalksController < ApplicationController
   # PATCH/PUT /walks/1 or /walks/1.json
   def update
     headers['Access-Control-Allow-Origin'] = '*'
+    
+    @walk = Walk.find params[:id]
+
     respond_to do |format|
       if @walk.update(walk_params)
         format.html { redirect_to walk_url(@walk), notice: "Walk was successfully updated." }
