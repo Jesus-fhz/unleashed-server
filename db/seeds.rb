@@ -252,6 +252,39 @@ w3 = Walk.create!(
     special_instruction: 'he is aggressive with other larger dogs.'
 )
 
+w4 = Walk.create!(
+    pet_id: Pet.fourth.id,
+    user_id: User.walker.fourth.id,
+    status: 0,
+    cost: 100,
+    duration: 60,
+    latitude: -33.8724236,
+    longitude: 151.2591179,
+    special_instruction: 'he is aggressive with other larger dogs.'
+)
+
+w5 = Walk.create!(
+    pet_id: Pet.fifth.id,
+    user_id: User.walker.fifth.id,
+    status: 0,
+    cost: 100,
+    duration: 60,
+    latitude: -33.8724236,
+    longitude: 151.2591179,
+    special_instruction: 'he is aggressive with other larger dogs.'
+)
+
+w6 = Walk.create!(
+    pet_id: Pet.sixth.id,
+    user_id: User.walker.sixth.id,
+    status: 0,
+    cost: 100,
+    duration: 60,
+    latitude: -33.8724236,
+    longitude: 151.2591179,
+    special_instruction: 'he is aggressive with other larger dogs.'
+)
+
 puts "Success! #{ Walk.count } random walks created.".blue
 
 
