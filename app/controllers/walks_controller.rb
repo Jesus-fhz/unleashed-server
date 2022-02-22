@@ -8,7 +8,7 @@ class WalksController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
     @walks = Walk.all
     @pets = @walks.map{ |walk| walk.pet }
-s
+
     render :json => {walks: @walks, pets: @pets}
   end
 
@@ -109,7 +109,6 @@ s
     end      
   end
 
-<<<<<<< HEAD
   # DELETE /walks/1 or /walks/1.json
   def destroy
     headers['Access-Control-Allow-Origin'] = '*'
@@ -122,8 +121,6 @@ s
   end
 
 
-=======
->>>>>>> c9d3d690cfef0fb249ec7274b4ed5557a0a82079
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_walk
