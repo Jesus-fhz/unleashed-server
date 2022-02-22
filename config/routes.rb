@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get '/users/:id/walks/accepted' => 'users#show_user_walks'
   get '/pets/:id/walks' => 'pets#show_pet_walks'
 
-  get '/walks/:id/accepts' => 'walks#walker_accepts'
+  patch '/walks/:id/accepts' => 'walks#walker_accepts'
+  # get '/walks/:id/accepts' => 'walks#walker_accepts'
   get '/walks/pending/:lat/:lng' => 'walks#show_pending', constraints: { lat: /.*/, lng: /.*/ }
   
 
