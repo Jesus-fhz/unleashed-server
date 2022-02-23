@@ -18,7 +18,7 @@ class WalksController < ApplicationController
   end
 
 
-  
+
   # GET /walks/new
   def new
     headers['Access-Control-Allow-Origin'] = '*'
@@ -73,13 +73,28 @@ class WalksController < ApplicationController
   end
 
   ###########################
+  # OWNER SPECIFIC METHODS #
+  ###########################
+
+  # the owner's location who is attached to the walk instance. 
+  # GET /walks/i/user/loc/
+  def show_walker_loc
+    headers['Access-Control-Allow-Origin'] = '*'
+    @user = Walk.find(params[:id]).user
+
+    render :json => { lat: @user.latitude, lng: @user.longitude }
+  end
+    
+
+  ###########################
   # WALKER SPECIFIC METHODS #
   ###########################
 
   # GET /walks/pending/:lat/:lng where lat and lng belong to Walker making the request
   def show_pending # NOTE: this returns the walks and their pets wrapped in a hash
     # create a hash to include pet aswell
-    @walks = Walk.where(status: 0).near([params[:lat], params[:lng]], 5, units: :km); # change 5 to whatever range you want
+    # byebug
+    @walks = Walk.where(status: 0).near([params[:lat], params[:lng]], 100, units: :km); # change 5 to whatever range you want
     @pets = @walks.map{ |walk| walk.pet }
     # RETURNS hash of {walks: & pet:}
     # need pet and 
