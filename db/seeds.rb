@@ -285,18 +285,6 @@ w5 = Walk.create!(
     special_instruction: 'he is aggressive with other larger dogs.'
 )
 
-w6 = Walk.create!(
-    pet_id: Pet.fifth.id,
-    user_id: User.walker.fifth.id,
-    status: 0,
-    cost: 100,
-    duration: 60,
-    address: '1 dummy street', 
-    latitude: -33.8724236,
-    longitude: 151.2591179,
-    special_instruction: 'he is aggressive with other larger dogs.'
-)
-
 puts "Success! #{ Walk.count } random walks created.".blue
 
 
