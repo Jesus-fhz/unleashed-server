@@ -115,13 +115,9 @@ class WalksController < ApplicationController
 
   # GET /walks/pending/:lat/:lng where lat and lng belong to Walker making the request
   def show_pending # NOTE: this returns the walks and their pets wrapped in a hash
-    # create a hash to include pet aswell
-    # byebug
     @walks = Walk.where(status: 0).near([params[:lat], params[:lng]], 100, units: :km); # change 5 to whatever range you want
-    @pets = @walks.map{ |walk| walk.pet }
-    # RETURNS hash of {walks: & pet:}
-    # need pet and 
-    render :json => {walks: @walks, pets: @pets}
+
+    render json: @walks, include: :pet
   end
   
   # Changes the walker status to accepted
