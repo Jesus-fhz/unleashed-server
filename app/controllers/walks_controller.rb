@@ -15,6 +15,10 @@ class WalksController < ApplicationController
   # GET /walks/1 or /walks/1.json
   def show
     headers['Access-Control-Allow-Origin'] = '*'
+
+    @walk = Walk.find params[:id]
+
+    render :json => @walk
   end
 
 
@@ -24,7 +28,6 @@ class WalksController < ApplicationController
     headers['Access-Control-Allow-Origin'] = '*'
     @walk = Walk.new
   end
-
   # GET /walks/1/edit
   def edit
     headers['Access-Control-Allow-Origin'] = '*'
@@ -39,7 +42,7 @@ class WalksController < ApplicationController
     respond_to do |format|
       if @walk.save
         format.html { redirect_to walk_url(@walk), notice: "Walk was successfully created." }
-        format.json { render :show, status: :created, location: @walk }
+        format.json { render json:@walk, status: :created, location: @walk }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @walk.errors, status: :unprocessable_entity }
@@ -50,6 +53,9 @@ class WalksController < ApplicationController
   # PATCH/PUT /walks/1 or /walks/1.json
   def update
     headers['Access-Control-Allow-Origin'] = '*'
+    
+    @walk = Walk.find params[:id]
+
     respond_to do |format|
       if @walk.update(walk_params)
         format.html { redirect_to walk_url(@walk), notice: "Walk was successfully updated." }
@@ -125,6 +131,18 @@ class WalksController < ApplicationController
     end      
   end
 
+  # DELETE /walks/1 or /walks/1.json
+  def destroy
+    headers['Access-Control-Allow-Origin'] = '*'
+    @walk.destroy
+
+    respond_to do |format|
+      format.html { redirect_to walks_url, notice: "Walk was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_walk
@@ -133,6 +151,6 @@ class WalksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def walk_params
-      params.require(:walk).permit(:pet_id, :user_id, :status, :cost, :duration, :latitude, :longitude, :special_instruction)
+      params.require(:walk).permit(:pet_id, :user_id, :status,:address,:cost, :duration, :latitude, :longitude, :special_instruction)
     end
 end
