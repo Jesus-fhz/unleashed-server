@@ -18,7 +18,7 @@ class WalksController < ApplicationController
 
     @walk = Walk.find params[:id]
 
-    render :json => @walk
+    render json: @walk, include: :user
   end
 
   # GET /walks/new
