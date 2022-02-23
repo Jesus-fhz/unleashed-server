@@ -86,47 +86,59 @@ print "Creating Users..."
 
 i = 0;
 
-20.times do |u|
-    lat = center[:lat] + rand(-0.038..0.038)
-    lng = center[:lng] + rand(-0.038..0.038)
-
-    user = 'user'+(u+1).to_s
-    user = User.create!(password:'chicken', email:'testuser'+(u).to_s+'@unleashed.com')
-    user.name = (random_first_names.sample + ' ' + random_last_names.sample)
-    user.profile_image = 'http://www.fillmurray.com/400/400'
-    
-    if rand() < 0.4
-        user.user_type = 1 # for owner
-    else
-        user.user_type = 0 # for walker
-        if rand() < 0.1 
-            user.is_available = false
-        else
-            user.is_available = true
-        end
-
-        user.earnings = rand(100..2000)
-    end
-
-    user.address = addresses[i]
-    coords = User.address_to_geocode(user.address)
-    user.latitude = lat
-    user.longitude = lng
-
-    user.save
-    i += 1
-end
-
 # Custom admin user. Currently with no priveleges
 User.create(
-    name: 'admin',
-    email: 'admin@outlook.com',
+    name: 'walker',
+    email: 'walker@outlook.com',
     password: 'chicken',
     latitude: -33.895962,
     longitude: 151.247408,
     profile_image: 'http://www.fillmurray.com/400/400',
+    user_type: 0
+)
+
+User.create(
+    name: 'owner',
+    email: 'owner@outlook.com',
+    password: 'chicken',
+    latitude: -33.858399,
+    longitude: 150.978422,
+    profile_image: 'http://www.fillmurray.com/400/400',
     user_type: 1
 )
+
+20.times do |u|
+    lat = center[:lat] + rand(-0.038..0.038)
+    lng = center[:lng] + rand(-0.038..0.038)
+
+    if rand() < 0.4
+        user_type = 1 # for owner
+    else
+        user_type = 0 # for walker
+        earnings = rand(100..500)
+        if rand() < 0.1 
+            is_available = false
+        else
+            is_available = true
+        end
+
+    end
+
+    user = 'user'+(u+1).to_s
+    user = User.create!(password:'chicken', 
+        email:'testuser'+(u).to_s+'@unleashed.com',
+        name: (random_first_names.sample + ' ' + random_last_names.sample),
+        profile_image: 'http://www.fillmurray.com/400/400',
+        user_type: user_type,
+        earnings: earnings,
+        is_available: is_available,
+        address: addresses[u],
+        latitude: lat,
+        longitude: lng,
+    )
+    
+end
+
 
 puts "Success! We have #{User.owner.count} owners in the DB.".green
 puts "Success! We have #{User.walker.count} walkers in the DB".green
@@ -151,16 +163,12 @@ random_coords = []
     randomPet.user_id = User.owner[p].id
     
     # Is the pet male or female?
+    # If male, give it a male name. If else, give it a female name
     if rand() < 0.5
         randomPet.is_male = true
-    else
-        randomPet.is_male = false
-    end
-
-    # If male, give it a male name. If else, give it a female name
-    if randomPet.is_male
         randomPet.name = random_male_pet_names.sample
     else
+        randomPet.is_male = false
         randomPet.name = random_female_pet_names.sample
     end
 
@@ -208,7 +216,6 @@ random_coords = []
     randomPet.can_walk_offleash = [true, false].sample
     randomPet.can_be_petted = [true, false].sample
     randomPet.can_walk_with_other_dogs = [true, false].sample
-
     randomPet.save
 
 end
