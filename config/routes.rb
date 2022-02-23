@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   
   get '/walks/:id/walker/loc/' => 'walks#show_walker_loc'
   get '/walks/:id/owner/loc/' => 'walks#show_owner_loc'
+  get '/walks/accepted/:id' => 'walks#show_accepted_walk_pet_walker'
   
   #Get the login token from Knock
   post 'user_token' => 'user_token#create'

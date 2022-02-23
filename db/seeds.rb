@@ -252,7 +252,6 @@ w2 = Walk.create!(
 
 w3 = Walk.create!(
     pet_id: Pet.third.id,
-    user_id: User.walker.third.id,
     status: 0,
     cost: 100,
     duration: 60,
