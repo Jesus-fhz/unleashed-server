@@ -6,11 +6,10 @@ Rails.application.routes.draw do
   get '/users/:id/walks/accepted' => 'users#show_user_walks'
   get '/pets/:id/walks' => 'pets#show_pet_walks'
 
-  patch '/walks/:id/accepts' => 'walks#walker_accepts'
-  # get '/walks/:id/accepts' => 'walks#walker_accepts'
   get '/walks/pending/:lat/:lng' => 'walks#show_pending', constraints: { lat: /.*/, lng: /.*/ }
+  patch '/walks/:id/accepts' => 'walks#walker_accepts'
   
-
+  get '/walks/:id/user/loc/' => 'walks#show_walker_loc'
   
   #Get the login token from Knock
   post 'user_token' => 'user_token#create'
@@ -21,12 +20,5 @@ Rails.application.routes.draw do
   resources :pets
   resources :users
   resources :walks
-
-
-  # resources :messages, only: %i[index]
-  # resources :users, only: %i[index create] do
-  #   post 'add_message'
-  #   post 'change_status'
-  # end
-  # mount ActionCable.server => '/cable'
+  
 end
