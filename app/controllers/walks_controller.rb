@@ -21,8 +21,6 @@ class WalksController < ApplicationController
     render :json => @walk
   end
 
-
-
   # GET /walks/new
   def new
     headers['Access-Control-Allow-Origin'] = '*'
@@ -100,6 +98,16 @@ class WalksController < ApplicationController
     render :json => { lat: @user.latitude, lng: @user.longitude }
   end
     
+  # GET /walks/accepted/:id A call by the OWNER showing the walk, 
+  def show_accepted_walk_pet_walker # NOTE: this returns the walks and their pets wrapped in a hash
+    # create a hash to include pet aswell
+    @walk = Walk.find params[:id]
+    @pets = @walk.pet;
+    @walker = @walk.user;
+    # RETURNS hash of {walks: & pet:}
+    # need pet and 
+    render :json => {walks: @walk, pets: @pets, walker: @walker}
+  end
 
   ###########################
   # WALKER SPECIFIC METHODS #
