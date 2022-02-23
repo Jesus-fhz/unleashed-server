@@ -83,10 +83,19 @@ class WalksController < ApplicationController
   ###########################
 
   # the owner's location who is attached to the walk instance. 
-  # GET /walks/i/user/loc/
+  # GET /walks/:id/walker/loc/ (WHERE :id is WALK ID)
   def show_walker_loc
     headers['Access-Control-Allow-Origin'] = '*'
     @user = Walk.find(params[:id]).user
+
+    render :json => { lat: @user.latitude, lng: @user.longitude }
+  end
+  
+  # the walker's location who is attached to the walk instance. 
+  # GET /walks/:id/owner/loc/ (WHERE :id is WALK ID)
+  def show_owner_loc
+    headers['Access-Control-Allow-Origin'] = '*'
+    @user = Walk.find(params[:id]).pet.user
 
     render :json => { lat: @user.latitude, lng: @user.longitude }
   end
