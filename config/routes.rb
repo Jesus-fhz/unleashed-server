@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get '/walks/pending/:lat/:lng' => 'walks#show_pending', constraints: { lat: /.*/, lng: /.*/ }
   patch '/walks/:id/accepts' => 'walks#walker_accepts'
   
-  get '/walks/:id/user/loc/' => 'walks#show_walker_loc'
+  get '/walks/:id/walker/loc/' => 'walks#show_walker_loc'
+  get '/walks/:id/owner/loc/' => 'walks#show_owner_loc'
   
   #Get the login token from Knock
   post 'user_token' => 'user_token#create'
