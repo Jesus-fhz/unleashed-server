@@ -12,7 +12,7 @@ class WalksController < ApplicationController
     render :json => {walks: @walks, pets: @pets}
   end
 
-  # GET /walks/1 or /walks/1.json
+  # GET /walks/1
   def show
     headers['Access-Control-Allow-Origin'] = '*'
 
