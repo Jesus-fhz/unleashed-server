@@ -230,8 +230,7 @@ puts ('Creating seed walks...').blue
 
 w1 = Walk.create!(
     pet_id: Pet.first.id,
-    user_id: User.walker.first.id,
-    status: 1,
+    status: 0,
     cost: 10,
     duration: 30,
     address: '1 dummy street', 
@@ -243,7 +242,7 @@ w1 = Walk.create!(
 w2 = Walk.create!(
     pet_id: Pet.second.id,
     user_id: User.walker.second.id,
-    status: 2,
+    status: 3,
     cost: 11,
     duration: 30,
     address: '1 dummy street', 
