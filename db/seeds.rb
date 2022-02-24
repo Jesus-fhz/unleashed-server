@@ -126,4 +126,6 @@ Pet.create!(
   can_walk_with_other_dogs: false
 )
 
+Walk.destroy_all
+
 puts "Success! #{ Pet.count } random pets created.".yellow
