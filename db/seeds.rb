@@ -22,8 +22,8 @@ owner = User.create(
   email: 'rowena@ga.com',
   password: 'chicken',
   address: '1 Dummy Street',
-  latitude: -33.858399,
-  longitude: 150.978422,
+  latitude: -33.896962,
+  longitude: 151.237408,
   profile_image: 'https://res.cloudinary.com/metaverse-fc/image/upload/v1645675903/rowena_wxmany.jpg',
   user_type: 1
 )
@@ -125,5 +125,7 @@ Pet.create!(
   can_be_petted: true,
   can_walk_with_other_dogs: false
 )
+
+Walk.destroy_all
 
 puts "Success! #{ Pet.count } random pets created.".yellow
