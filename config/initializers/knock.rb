@@ -34,7 +34,7 @@ end
   ##
   ## Configure the algorithm used to encode the token
   ##
-  ## Default:
+  ## Default: 
   # config.token_signature_algorithm = 'HS256'
 
   ## Signature key
