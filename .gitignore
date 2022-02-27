@@ -19,7 +19,7 @@ Icon
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
-
+/config/local_env.yml
 # Directories potentially created on remote AFP share
 .AppleDB
 .AppleDesktop
