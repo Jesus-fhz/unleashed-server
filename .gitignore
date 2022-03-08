@@ -26,6 +26,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+/config/local_env.yml
 
 # End of https://www.gitignore.io/api/osx
 
