@@ -6,25 +6,25 @@ User.destroy_all
 
 # Walker
 walker = User.create!( 
-  name: 'Suraj Sharma',
-  email: 'suraj@ga.com',
+  name: 'Test Walker',
+  email: 'walker@ga.com',
   password: 'chicken',
   address: '1 Dummy Street',
   latitude: -33.895962,
   longitude: 151.247408,
-  profile_image: 'https://res.cloudinary.com/metaverse-fc/image/upload/v1645676463/suraj_wtfgsw.jpg',
+  profile_image: 'https://res.cloudinary.com/metaverse-fc/image/upload/v1648171294/image-for-unleashed-user-default.jpg',
   user_type: 0 
 )
 
 # Owner
 owner = User.create(
-  name: 'Rowena Leung',
-  email: 'rowena@ga.com',
+  name: 'Test owner',
+  email: 'owner@ga.com',
   password: 'chicken',
   address: '1 Dummy Street',
   latitude: -33.896962,
   longitude: 151.237408,
-  profile_image: 'https://res.cloudinary.com/metaverse-fc/image/upload/v1645675903/rowena_wxmany.jpg',
+  profile_image: 'https://res.cloudinary.com/metaverse-fc/image/upload/v1648171294/image-for-unleashed-user-default.jpg',
   user_type: 1
 )
 
