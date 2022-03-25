@@ -2,7 +2,11 @@ Knock.setup do |config|
   
   config.token_lifetime = 1.day
   config.token_signature_algorithm = 'HS256'
+<<<<<<< HEAD
   config.token_secret_signature_key = -> {ENV["UNLEASHED_SECRET_PHRASE"]}
+=======
+  config.token_secret_signature_key = -> {Rails.application.secrets.secret_key_base}
+>>>>>>> 7438c0782aa20c7d52b081c4f033a53ebd8dabb1
   config.not_found_exception_class_name = 'ActiveRecord::RecordNotFound'
   
 end
